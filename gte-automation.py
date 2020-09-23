@@ -149,7 +149,7 @@ def get_gte_element(name, row):
     # map of relevant xpath keys we are targeting
 
     gte_xpath_map = {
-        "Period": '//*[@id="N77"]',
+        "Period": '//*[@id="N75"]',
         "Project Details": '//*[@id="A24!row!N1display"]',
         "Task Details": '//*[@id="A25!row!N1display"]',
         "Type": '//*[@id="A26!row!N1display"]',
@@ -321,7 +321,7 @@ def get_detail_entries(consolidated_day_map, index):
             if iteration == index:
                 return consolidated_day_map.get(key)
             iteration = iteration + 1
- 
+
 def run_gte_time_detail_entries(driver,timesheet_entries, timesheet_mapping):
     print('Filling in task details')
 
@@ -331,8 +331,15 @@ def run_gte_time_detail_entries(driver,timesheet_entries, timesheet_mapping):
         rows = rows + 1
         detail.click()
         timer.sleep(2)
-        # the the task from the page
-        task = driver.find_element_by_css_selector('.x1t .xiz').text
+        # get the task and task details from the page
+        task = None
+        details = None
+
+        taskDetails = driver.find_elements_by_css_selector('.x1t .xiz')
+        if len(taskDetails) > 1:
+            task = taskDetails[0].text
+            details = taskDetails[1].text
+
         days = driver.find_elements_by_css_selector('.x7p')
         for counter, day in enumerate(days):
             dayStringParse = days[counter].text.split(':')[1].strip().split(',')
@@ -342,14 +349,14 @@ def run_gte_time_detail_entries(driver,timesheet_entries, timesheet_mapping):
             dateLine = parsedDate.strftime('%m/%d')
             dateLine = str(int(dateLine.split('/')[0])) + '/' + str(int(dateLine.split('/')[1]))
             tb = driver.find_elements_by_tag_name('textarea')[counter]
-            tb.send_keys(find_detail_lines_for_date_and_task(dateLine,task,timesheet_entries, timesheet_mapping))
+            tb.send_keys(find_detail_lines_for_date_and_task(dateLine,task,details,timesheet_entries, timesheet_mapping))
         find_button(driver, 'Apply').click()
-    
-def find_detail_lines_for_date_and_task( dateLine, task, timesheet_entries, timesheet_mapping):
+
+def find_detail_lines_for_date_and_task(dateLine, task, details, timesheet_entries, timesheet_mapping):
     lines = ''
     flag = False
     str_line = ''
-    bucket = get_bucket_for_project_code(timesheet_mapping, task)
+    bucket = get_bucket_for_project_code(timesheet_mapping, task, details)
     if not bucket:
         raise ValueError("could not find bucket for project code: "+task)
 
@@ -370,10 +377,10 @@ def find_detail_lines_for_date_and_task( dateLine, task, timesheet_entries, time
                 lines = lines + line_parts[1].strip() + ' (' + line_parts[2].strip()+ ') \n'
     return lines
 
-def get_bucket_for_project_code(timesheep_mapping, project_code):
+def get_bucket_for_project_code(timesheep_mapping, project_code, task_details):
     for x in timesheep_mapping:
         mapping = timesheep_mapping.get(x)
-        if mapping.get('Project Details') == project_code:
+        if mapping.get('Project Details') == project_code and mapping.get('Task Details') == task_details:
             return x
 
 def find_button(driver, name):
@@ -488,7 +495,7 @@ if 'period' in timesheet_entries[0] and len(timesheet_entries[0].split('=')) == 
     print("Setting period of timesheet to: "+period)
     elem.send_keys(period)
     timer.sleep(page_wait_for_rows)
-    
+
 # Don't work on a timesheet that already has data saved in it!
 if driver.find_element_by_xpath('//*[@id="B22_1_0"]').get_attribute('value'):
     raise ValueError("Warning!  Detected a already saved timesheet, not proceeding.")
@@ -516,4 +523,3 @@ if not 'The timecard has been saved successfully.' in driver.page_source:
     raise ValueError("Warning, did not detect the timesheet was saved, check it!")
 
 driver.quit()
-
