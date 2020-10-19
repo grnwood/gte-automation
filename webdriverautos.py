@@ -1,28 +1,52 @@
-
 import logging
 import json
 import re
 import calendar
 import time as timer
+import sys
+from datetime import datetime
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
-from pprint import pprint
-from datetime import datetime
 
-# define some globls
-week_total_hours = ''
-run_browser = False
-print_summary_only = True
-matcher = re.compile(r"\d\d?\/\d\d?")
-day_summary = {}
+
 sleep_seconds_between_ops = 1
-page_wait_for_rows = 2
+matcher = re.compile(r"\d\d?\/\d\d?")
 
+def get_sleep_time():
+    return sleep_seconds_between_ops
 
+def change_period(driver, timesheet_entries, page_wait_for_rows):
+    # check if we are dealing with a different period
+    if 'period' in timesheet_entries[0] and len(timesheet_entries[0].split('=')) == 2:
+        elem = driver.find_elements_by_tag_name('select')[0]
+        period = timesheet_entries[0].split('=')[1]
+        print("Setting period of timesheet to: "+period)
+        elem.send_keys(period)
+        timer.sleep(page_wait_for_rows)
+        return driver
+
+def check_empty(driver):
+    # Don't work on a timesheet that already has data saved in it unless we are in update mode!
+    if driver.find_element_by_xpath('//*[@id="B22_1_0"]').get_attribute('value'):
+        raise Exception("Warning!  Detected a already saved timesheet \
+            NOT proceeding.")
+    return driver
+
+def check_success(driver):
+    # make sure it saved
+    if not 'The timecard has been saved successfully.' in driver.page_source:
+        raise ValueError("Warning, did not detect the timesheet was saved, check it!")
+
+def get_driver():
+    driver = webdriver.Firefox()
+    driver.set_window_size(1400,700)
+    return driver
+    
 def login(driver):
     user = ''
     password = ''
@@ -68,82 +92,7 @@ def login(driver):
         raise "No GTE main page page"
 
     driver.get("https://upp.capgemini.com/OA_HTML/RF.jsp?function_id=16744&resp_id=71369&resp_appl_id=809&security_group_id=0&lang_code=US&oas=ZyZNPnozfgJIWQBaFio13Q..&params=avwQ4Zpumqk4wM2hnLSEtfVRURgrCch9rnGvV9mMQIc")
-
-
-def get_time_mapping():
-    # load file
-    mappings = {}
-    f = open('time-mapping.json', 'r')
-    mappings = json.load(f)
-    f.close()
-    return mappings
-
-
-def get_time_entries():
-    # load entires
-    entries = []
-    f = open('time-entries.txt', 'r')
-    entries = f.readlines()
-    f.close()
-    return entries
-
-
-def map_time_entries_by_day(timesheet_lines):
-    """
-    This should consolidate each day into a map by day
-    """
-    day_map = {}
-    cur_day_lines = []
-    cur_day = ''
-    for line in timesheet_lines:
-        if 'period' in line:
-            continue
-        line = line.strip()
-        if not line:
-            continue
-        if matcher.match(line):
-            if line in day_map:
-                cur_day_lines = day_map.get(line)
-            else:
-                print("new day: "+line)
-                cur_day = line
-                day_map[line] = []
-                cur_day_lines = day_map.get(line)
-        else:
-            cur_day_lines.append(line)
-        day_map[cur_day] = cur_day_lines
-    return day_map
-
-
-def consolidate_time_entries_per_day(timesheet_lines):
-    '''
-    This method looks to summarize the time buckets by day
-    '''
-    map_of_buckets = {}
-    map_of_desc = {}
-    for line in timesheet_lines:
-        if 'period' in line:
-            continue
-        if len(line.strip()) > 0:
-            fields = line.split(',')
-            key = fields[0]
-            time = fields[2]
-            desc = fields[1]
-            time_desc = desc + ' ('+time+')\n'
-            if key in map_of_buckets:
-                val = int(map_of_buckets.get(key))
-                val = val + int(time)
-                map_of_buckets[key] = val
-            else:
-                map_of_buckets[key] = int(time)
-            if key in map_of_desc:
-                descs = map_of_desc.get(key)
-                descs = descs + time_desc
-                map_of_desc[key] = descs
-            else:
-                map_of_desc[key] = time_desc
-    return {'map_of_buckets': map_of_buckets, 'map_of_desc': map_of_desc}
-
+    return driver
 
 def get_gte_element(name, row):
     # map of relevant xpath keys we are targeting
@@ -169,7 +118,6 @@ def get_gte_element(name, row):
     val = gte_xpath_map.get(name)
     val = val.replace('!row!', str(row))
     return val
-
 
 def run_gte_time_matrix(driver, timesheet_mapping, consolidated_day_map):
     # loop all the unique buckets I will have for this week
@@ -200,7 +148,7 @@ def run_gte_time_matrix(driver, timesheet_mapping, consolidated_day_map):
     for key in consolidated_day_map.keys():
         if not '-desc' in key:
             datestring = key
-            if (len(datestring) < 5):
+            if (len(datestring) <= 5):
                 # assume 2020
                 datestring = datestring + "/2020"
             curdate = datetime.strptime(datestring, '%m/%d/%Y')
@@ -246,6 +194,7 @@ def run_gte_time_matrix(driver, timesheet_mapping, consolidated_day_map):
                             tasktype = globalmap.get('Type')
                             elem = driver.find_element_by_xpath(
                                 get_gte_element('Type', row))
+                            
                             elem.send_keys(tasktype)
                             webdriver.ActionChains(
                                 driver).send_keys(Keys.TAB).perform()
@@ -302,7 +251,6 @@ def run_gte_time_matrix(driver, timesheet_mapping, consolidated_day_map):
                     raise ValueError("ran across a key I have no mapping for.")
     return unique_buckets_for_week
 
-
 def find_detail_link(driver, index):
     details_image = 'detailsicon_enabled.gif'
     details = driver.find_elements_by_css_selector('.x1x > a > img')
@@ -349,7 +297,7 @@ def find_detail_lines_for_date_and_task( dateLine, task, timesheet_entries, time
     lines = ''
     flag = False
     str_line = ''
-    bucket = get_bucket_for_project_code(timesheet_mapping, task)
+    bucket = ts.get_bucket_for_project_code(timesheet_mapping, task)
     if not bucket:
         raise ValueError("could not find bucket for project code: "+task)
 
@@ -370,12 +318,6 @@ def find_detail_lines_for_date_and_task( dateLine, task, timesheet_entries, time
                 lines = lines + line_parts[1].strip() + ' (' + line_parts[2].strip()+ ') \n'
     return lines
 
-def get_bucket_for_project_code(timesheep_mapping, project_code):
-    for x in timesheep_mapping:
-        mapping = timesheep_mapping.get(x)
-        if mapping.get('Project Details') == project_code:
-            return x
-
 def find_button(driver, name):
     elems = driver.find_elements_by_css_selector('.x80')
     for button in elems:
@@ -391,129 +333,9 @@ def check_totals(driver, total_hours):
         raise ValueError("Warning detected only "+hours +
                          " hours but timesheet has: "+total_hours)
 
-
-def sanity_check_input(timesheet_entries, timesheet_mapping):
-    # make sure we have at least some data
-    assert len(timesheet_entries) > 0
-    assert len(timesheet_mapping) > 0
-
-    # sanity check in bound data is three cols
-    for tline in timesheet_entries:
-        assert (len(tline.split(',')) == 3 or len(tline.strip()) == 0 \
-            or matcher.match(tline.strip()) or 'period' in tline)
-
 def recalculate(driver):
     # let's make sure it's fully recalculated
     elem = find_button(driver, 'Recalculate')
     elem.click()
-    timer.sleep(page_wait_for_rows)
-
-
-def sanity_check_calcs(summary_time_totals):
-    # sanity check each key in the summary against the map.
-    for key in summary_time_totals:
-        for sttKey in summary_time_totals.get(key):
-            if not '-desc' in sttKey and sttKey not in timesheet_mapping:
-                raise ValueError('You have time entry key ('+sttKey +
-                                 ') that is not in timesheet mapping.  Please update.')
-
-
-def get_consolidated_day_map(day_map):
-    consolidated_day_map = {}
-
-    for key in day_map.keys():
-        tlines = day_map.get(key)
-        totals = consolidate_time_entries_per_day(tlines)
-        consolidated_day_map[key] = totals.get('map_of_buckets')
-        consolidated_day_map[key+'-desc'] = totals.get('map_of_desc')
-
-    return consolidated_day_map
-
-# gather summaries
-
-
-def summarize_the_week(consolidated_day_map):
-    day_summary = []
-    total = 0
-    week_total = 0
-    for key in consolidated_day_map:
-        if '-desc' not in key:
-            day_total = 0
-            buckets = consolidated_day_map.get(key)
-            entries = []
-            for sttKey in buckets:
-                curtotal = int(buckets.get(sttKey))
-                total = total + curtotal
-                day_total = day_total + curtotal
-                entries.append(sttKey+'( '+str(curtotal) +
-                               ' mins / ' + str(curtotal/60) + ' hours)')
-                entries[0] = "== "+key + " == day total ("+str(
-                    day_total)+" mins / " + str(day_total/60) + " hours) =="
-            week_total = week_total + day_total
-            day_summary.append(entries)
-
-    week_total_hours = str(week_total/60)
-    if print_summary_only:
-        pprint(day_summary)
-        print()
-        print("Week total: "+str(week_total) +
-              ' mins ' + str(week_total/60) + ' hours')
-        exit
-    return week_total_hours
-
-# login and get to timesheet entry page
-# login(driver)
-
-
-# fire up selenium firefox
-# if run_browser:
-timesheet_entries = get_time_entries()
-timesheet_mapping = get_time_mapping()
-sanity_check_input(timesheet_entries, timesheet_mapping)
-
-day_map = map_time_entries_by_day(timesheet_entries)
-consolidated_day_map = get_consolidated_day_map(day_map)
-sanity_check_calcs(consolidated_day_map)
-
-week_total_hours = summarize_the_week(consolidated_day_map)
-
-driver = webdriver.Firefox()
-driver.set_window_size(1400,700)
-login(driver)
-
-# check if we are dealing with a different period
-if 'period' in timesheet_entries[0] and len(timesheet_entries[0].split('=')) == 2:
-    elem = driver.find_elements_by_tag_name('select')[0]
-    period = timesheet_entries[0].split('=')[1]
-    print("Setting period of timesheet to: "+period)
-    elem.send_keys(period)
-    timer.sleep(page_wait_for_rows)
-    
-# Don't work on a timesheet that already has data saved in it!
-if driver.find_element_by_xpath('//*[@id="B22_1_0"]').get_attribute('value'):
-    raise ValueError("Warning!  Detected a already saved timesheet, not proceeding.")
-
-# fill out the time matrix (first page)
-unique_buckets_for_week = run_gte_time_matrix(driver, timesheet_mapping, consolidated_day_map)
-
-# recalc one more time.
-recalculate(driver)
-timer.sleep(sleep_seconds_between_ops)
-
-# check totals
-check_totals(driver, week_total_hours)
-
-# we have verified our totals, let's save and move on
-run_gte_time_detail_entries(driver, timesheet_entries, timesheet_mapping)
-
-#save the timesheet for now (no submit)
-elem = find_button(driver, 'Save')
-elem.click()
-timer.sleep(page_wait_for_rows)
-
-# make sure it saved
-if not 'The timecard has been saved successfully.' in driver.page_source:
-    raise ValueError("Warning, did not detect the timesheet was saved, check it!")
-
-driver.quit()
+    timer.sleep(get_sleep_time())
 

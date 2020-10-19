@@ -1,0 +1,2 @@
+need to add a '--check' parm which just checks buckets and totals no selenium
+need to add a check to make sure timesheet 'period' selection doenot conflict with the dates in the sheet.

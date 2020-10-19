@@ -1,52 +1,54 @@
-period=september 14
+10/12
+kont,daily standup call,15
+clubs,internal hard coding chat wiht V,30
+kont,tech speccing and tickets the adyen and five9 psp pieces,120
+clubs,sync up call on data and catalog issues and followup,60
+citta,working on email items with laura,60
+bbwinapp,looking into 5096,60
+citta,weeklky status cal,45
+bbwinapp,tech specs for postmessage,120
+kont,pm and tickets,60
 
-9/14
-clubs,internal srcum,30
-int,all hands meeting,30
-clubs,content enclave email,30
-sales,kontoor oobo staffing and timeline quesitons,30
-cush,weekly status call,60
-dartdesign,review where we are at on pdp redsing proejct,30
-dartdesign,FSD review meeting,60
-clubs,writeup and replication of data,90
-int,automation for the new timesheet system,90
-int,emails and timesheets,30
+10/13
+kont,oobo client meeting,15
+clubs,internal scrum and followups,60
+kont,service cloud research and scrum,60
+bbwinapp,loyalty walkthrough,60
+bbwinapp,more spec updates for postmesage,45
+clubs,weekly status call,60
+atx,pdp redesing review,45
+rap,cert research,30
+citta,yotpo tsd,180
 
-9/15
-clubs,clubs scrum,30
-clubs,demo call part 2,60
-sales,uniform advantage embroidery call,60
-clubs,followups on upcharges,75
-clubs,status call,30
-bbwinapp,analytics alignment meeting,30
-int,emails and timesheets,75
-sales,uniform advantage followup,60
-int,esop followup,60
+10/14
+kont,client scrum,30
+cush,discuss arch refresh needs,15
+bbwinapp,daily stand up,15
+citta,yotpo spec review with team and followup,90
+kont,five9 weekly meeting and followup,90
+bbwinapp,loyalty sia customer experience meeting,60
+rap,production certs and configuraitons,120
+dartrefresh,internal team scrum,30
+dartrefresh,design meeting with client,30
 
-9/16
-clubs,scrum,30
-clubs,work with V on envs and pricing,30
-clubs,meet with rob and on pricing,30
-sales,internal UA review,45
-cush,support scrum,30
-citta,yotpo questions and prep,60
-citta,yotpo kickoff call,60
-citta,holiday timeilne approach,60
-bbwinapp,meeting with nick and team about deliverables and followup,60
-int,timesheet automation,75
+10/15
+kont,oobo standup,15
+clubs,scrum and followup,60
+cush,support scrum,15
+cush,vokey tax call and research,120
+bbwinapp,meeting and specs,120
+kont,oobo flows and research,60
+kont,securypay and ivr setup,45
+int,emails an timesheets,60
 
-9/17
-rap,weekly status,15
-clubs,internal scurm and pricing question,30
-cush,internal support scrum,30
-int,timesheet automation,240
-bbwinapp,req meeting about overtake urls,60
-int,one and one with pankaj,45
-int,timesheet automation,60
-
-9/18
-clubs,internal clubs scrum,30
-clubs,demo and content handoff call,60
-dartdesign,working on PDP specs,240
-sales,unifrom advantage estimatire,120
-dartdesign,review TSD meeting,30
+10/16
+kont,client daily scrum,30
+bbwinapp,daily stand up,30
+kont,review functional specs,60
+int,emails and timesheets,60
+sales,kontoor sfmc opp,30
+kont,kontoor five9 working session and followup,90
+int,boss one on one,30
+citta,looking into yotpo creds and console,60
+kont,five9 research and ticket updates,120
+int,h2 assignment appriasals,60
