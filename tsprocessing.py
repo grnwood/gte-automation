@@ -81,12 +81,6 @@ def consolidate_time_entries_per_day(timesheet_lines):
                 map_of_desc[key] = time_desc
     return {'map_of_buckets': map_of_buckets, 'map_of_desc': map_of_desc}
 
-def get_bucket_for_project_code(timesheep_mapping, project_code):
-    for x in timesheep_mapping:
-        mapping = timesheep_mapping.get(x)
-        if mapping.get('Project Details') == project_code:
-            return x
-
 def sanity_check_input(timesheet_entries, timesheet_mapping):
     # make sure we have at least some data
     assert len(timesheet_entries) > 0

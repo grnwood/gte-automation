@@ -4,6 +4,7 @@ import re
 import calendar
 import time as timer
 import sys
+import tscommon as tscommon
 from datetime import datetime
 
 from selenium import webdriver
@@ -28,7 +29,7 @@ def change_period(driver, timesheet_entries, page_wait_for_rows):
         print("Setting period of timesheet to: "+period)
         elem.send_keys(period)
         timer.sleep(page_wait_for_rows)
-        return driver
+    return driver
 
 def check_empty(driver):
     # Don't work on a timesheet that already has data saved in it unless we are in update mode!
@@ -43,8 +44,12 @@ def check_success(driver):
         raise ValueError("Warning, did not detect the timesheet was saved, check it!")
 
 def get_driver():
-    driver = webdriver.Firefox()
-    driver.set_window_size(1400,700)
+    opts = webdriver.FirefoxOptions()
+    opts.add_argument("--width=1400")
+    opts.add_argument("--height=700")
+    driver = webdriver.Firefox(options=opts)
+    #driver = webdriver.Firefox()
+    #driver.set_window_size(1400,700)
     return driver
     
 def login(driver):
@@ -297,7 +302,7 @@ def find_detail_lines_for_date_and_task( dateLine, task, timesheet_entries, time
     lines = ''
     flag = False
     str_line = ''
-    bucket = ts.get_bucket_for_project_code(timesheet_mapping, task)
+    bucket = tscommon.get_bucket_for_project_code(timesheet_mapping, task)
     if not bucket:
         raise ValueError("could not find bucket for project code: "+task)
 

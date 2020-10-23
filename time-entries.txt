@@ -1,54 +1,66 @@
-10/12
-kont,daily standup call,15
-clubs,internal hard coding chat wiht V,30
-kont,tech speccing and tickets the adyen and five9 psp pieces,120
-clubs,sync up call on data and catalog issues and followup,60
-citta,working on email items with laura,60
-bbwinapp,looking into 5096,60
-citta,weeklky status cal,45
-bbwinapp,tech specs for postmessage,120
-kont,pm and tickets,60
+period=October 19
 
-10/13
-kont,oobo client meeting,15
-clubs,internal scrum and followups,60
-kont,service cloud research and scrum,60
-bbwinapp,loyalty walkthrough,60
-bbwinapp,more spec updates for postmesage,45
-clubs,weekly status call,60
-atx,pdp redesing review,45
-rap,cert research,30
-citta,yotpo tsd,180
-
-10/14
-kont,client scrum,30
-cush,discuss arch refresh needs,15
+10/19
+kont,daily standup and followup,30
 bbwinapp,daily stand up,15
-citta,yotpo spec review with team and followup,90
-kont,five9 weekly meeting and followup,90
-bbwinapp,loyalty sia customer experience meeting,60
-rap,production certs and configuraitons,120
-dartrefresh,internal team scrum,30
-dartrefresh,design meeting with client,30
+int, emails and timesheets,45
+clubs,daily scrum,15
+int,all hands call,30
+kont,oobo scrum,30
+cushsupport,dakly scrum,30
+kont,emails to five9 and ivr busy research,30
+cushsupport,checking 2074,30
+citta,yotpo daily scrum,30
+citta,yotpo specs with ba,30
+citta,yotpo redemption reserach and tesd updtaed,120
+citta,weekly status call,60
 
-10/15
-kont,oobo standup,15
-clubs,scrum and followup,60
-cush,support scrum,15
-cush,vokey tax call and research,120
-bbwinapp,meeting and specs,120
-kont,oobo flows and research,60
-kont,securypay and ivr setup,45
-int,emails an timesheets,60
-
-10/16
-kont,client daily scrum,30
-bbwinapp,daily stand up,30
-kont,review functional specs,60
+10/20
+kont,daily standup,30
+kont,order history reserach,15
+clubs,go over phase 2 items for dave,60
+kont,scrum and securepay and service testing,90
+cush,monday weekly development meeting,45
+citta,daily scrum yotpo,15
+bbwinapp,web cookies meeting,45
+clubs,weekly status meeting,60
+cush,staging build,15
+bbwinapp,Loyalty SIA  Communication/Emails,90
 int,emails and timesheets,60
-sales,kontoor sfmc opp,30
-kont,kontoor five9 working session and followup,90
-int,boss one on one,30
-citta,looking into yotpo creds and console,60
-kont,five9 research and ticket updates,120
-int,h2 assignment appriasals,60
+
+10/21
+bbwinapp,shop in app dsu,15
+kont,scrum and working session,90
+clubs,clubs scrum,30
+kont,five9 status call,90
+citta,yotpo sfcc integration,30
+kont, oobo and person mieeting,60
+dartrefresh,weekly checkin,30
+citta,citizen scrum,30
+cush,acushnet status check ea,30
+cush,daily scrum,30
+int,emails and timesheets,45
+
+10/22
+clubs,scrum,30
+clubs,mtcu151 catalog approach,30
+cush,weekly status meeting,30
+int,People Management Series: Technical Career Path,60
+citta,yotpo scrum and ticket and followup,60
+citta,trufit prep meeting and followup,75
+kont,debug and research and specs on person accounts and five9 integration,180
+kont,oobo scrum and followup,45
+
+10/23
+clubs,phase 2 scoping and tickets,60
+clubs,scrum and followup,30
+kont,internal scrum and followup,60
+citta,yotpo api qeustions and emails,30
+citta,yotpo refund file spec updates and questions,30
+cush,daily scrum,30
+kont,five9 adyen emails,15
+citta,yotpo status call and followup,60
+int,lunch and learn javascript,60
+lead,workign with FED on caching and reset options,30
+sales,uniform advantage proposal walk through,60
+int,emails and timesheets,30

@@ -57,7 +57,7 @@ if not just_do_data_check:
     elem.click()
     timer.sleep(page_wait_for_rows)
 
-    wd.webdriverauto.check_success(driver)
+    wd.check_success(driver)
     driver.quit()
 else:
     print('Data check only, not running actual timesheet')
