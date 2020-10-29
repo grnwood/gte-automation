@@ -4,7 +4,8 @@ import re
 import calendar
 import time as timer
 import sys
-import tscommon as tscommon
+import tscommon
+import tsprocessing
 from datetime import datetime
 
 from selenium import webdriver
@@ -16,7 +17,6 @@ from selenium.webdriver.common.by import By
 
 
 sleep_seconds_between_ops = 1
-matcher = re.compile(r"\d\d?\/\d\d?")
 
 def get_sleep_time():
     return sleep_seconds_between_ops
@@ -295,33 +295,10 @@ def run_gte_time_detail_entries(driver,timesheet_entries, timesheet_mapping):
             dateLine = parsedDate.strftime('%m/%d')
             dateLine = str(int(dateLine.split('/')[0])) + '/' + str(int(dateLine.split('/')[1]))
             tb = driver.find_elements_by_tag_name('textarea')[counter]
-            tb.send_keys(find_detail_lines_for_date_and_task(dateLine,task,timesheet_entries, timesheet_mapping))
+            tb.send_keys(tscommon.find_detail_lines_for_date_and_task(dateLine,task,timesheet_entries, timesheet_mapping))
         find_button(driver, 'Apply').click()
     
-def find_detail_lines_for_date_and_task( dateLine, task, timesheet_entries, timesheet_mapping):
-    lines = ''
-    flag = False
-    str_line = ''
-    bucket = tscommon.get_bucket_for_project_code(timesheet_mapping, task)
-    if not bucket:
-        raise ValueError("could not find bucket for project code: "+task)
 
-    for str_line in timesheet_entries:
-        # found a date heading?
-        if matcher.match(str_line):
-            # the date heading we want? then set a flag
-            if dateLine in str_line:
-                flag = True
-            else:
-                flag = False
-            continue
-        if flag:
-            line_parts = str_line.split(',')
-            if not len(line_parts) == 3:
-                continue
-            if line_parts[0] == bucket:
-                lines = lines + line_parts[1].strip() + ' (' + line_parts[2].strip()+ ') \n'
-    return lines
 
 def find_button(driver, name):
     elems = driver.find_elements_by_css_selector('.x80')

@@ -4,10 +4,11 @@ import re
 import calendar
 import time as timer
 import sys
+import tscommon
+
 from pprint import pprint
 from datetime import datetime
 
-matcher = re.compile(r"\d\d?\/\d\d?")
 print_summary_only = True
 
 def get_time_mapping():
@@ -39,7 +40,7 @@ def map_time_entries_by_day(timesheet_lines):
         line = line.strip()
         if not line:
             continue
-        if matcher.match(line):
+        if tscommon.date_heading_matcher.match(line):
             if line in day_map:
                 cur_day_lines = day_map.get(line)
             else:
@@ -92,7 +93,7 @@ def sanity_check_input(timesheet_entries, timesheet_mapping):
         line += 1
         try: 
             assert (len(tline.split(',')) == 3 or len(tline.strip()) == 0 \
-                or matcher.match(tline.strip()) or 'period' in tline)
+                or tscommon.date_heading_matcher.match(tline.strip()) or 'period' in tline)
         except:
             raise Exception('bad line #'+str(line))
 

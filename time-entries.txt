@@ -1,66 +1,47 @@
-period=October 19
 
-10/19
-kont,daily standup and followup,30
-bbwinapp,daily stand up,15
-int, emails and timesheets,45
-clubs,daily scrum,15
-int,all hands call,30
-kont,oobo scrum,30
-cushsupport,dakly scrum,30
-kont,emails to five9 and ivr busy research,30
-cushsupport,checking 2074,30
-citta,yotpo daily scrum,30
-citta,yotpo specs with ba,30
-citta,yotpo redemption reserach and tesd updtaed,120
-citta,weekly status call,60
+10/26
+kont,internal scrum research and meetings specs and tickets etc,495
+citta,yotpo research questions and calls,45
 
-10/20
-kont,daily standup,30
-kont,order history reserach,15
-clubs,go over phase 2 items for dave,60
-kont,scrum and securepay and service testing,90
-cush,monday weekly development meeting,45
-citta,daily scrum yotpo,15
-bbwinapp,web cookies meeting,45
-clubs,weekly status meeting,60
-cush,staging build,15
-bbwinapp,Loyalty SIA  Communication/Emails,90
-int,emails and timesheets,60
-
-10/21
-bbwinapp,shop in app dsu,15
-kont,scrum and working session,90
-clubs,clubs scrum,30
-kont,five9 status call,90
-citta,yotpo sfcc integration,30
-kont, oobo and person mieeting,60
-dartrefresh,weekly checkin,30
-citta,citizen scrum,30
-cush,acushnet status check ea,30
-cush,daily scrum,30
+10/27
+citta,yotpo configuration and troubleshooting,60
+citta,checkin with dev on yotpo and emails and troubleshooting,60
+cush,support acushnet call,15
+kont,debugging launch cart and cartridge connector,120
+int,sf b2c dev team meeting,60
+clubs,weekly status meeting,75
+dartsupport,dart 258,30
+kont,r12 release meeting,15
 int,emails and timesheets,45
 
-10/22
-clubs,scrum,30
-clubs,mtcu151 catalog approach,30
-cush,weekly status meeting,30
-int,People Management Series: Technical Career Path,60
-citta,yotpo scrum and ticket and followup,60
-citta,trufit prep meeting and followup,75
-kont,debug and research and specs on person accounts and five9 integration,180
-kont,oobo scrum and followup,45
+10/28
+bbwinapp,daily scrum,15
+kont,daily client scrum,30
+citta,yotpo email and response,15
+bbwinapp,demo loyalty sia,60
+sales,hour with kontoor and efforts,75	
+kont,sfcc sfsc reserach and work,180
+dartrefresh,meeting about tickets and site speed,60
+kont,securepay call,60
+citta,yotpo research and ticket updates,45
+int,emails and timesheets,60
+sales,uniform advantage discussion,30
+sales,kontoor additional work,30
 
-10/23
-clubs,phase 2 scoping and tickets,60
-clubs,scrum and followup,30
-kont,internal scrum and followup,60
-citta,yotpo api qeustions and emails,30
-citta,yotpo refund file spec updates and questions,30
-cush,daily scrum,30
-kont,five9 adyen emails,15
-citta,yotpo status call and followup,60
-int,lunch and learn javascript,60
-lead,workign with FED on caching and reset options,30
-sales,uniform advantage proposal walk through,60
-int,emails and timesheets,30
+10/29
+citta,yotpo call and troubleshooting,75
+atx,working on 103,30
+kont,oobo metings and scrums,120
+cush,vertex ticket call,30
+sales,kontoor line of work,45
+citta,additional yotpo tshooting call,30
+int,jeff joe discussion on promotion case and resourcing,60
+dartrefresh,nbt internal meeting,60
+int,emails and timesheets,60
+
+10/30
+kont,oobo stuff,120
+bbwinapp,scrum timeout modal,60
+kont,oobo salesforce discussion,60
+train,sfmc developer training,180
+citta,yotpo stuff,120
