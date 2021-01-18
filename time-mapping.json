@@ -5,20 +5,32 @@
         "Location": "Illinois - No Local - IL - USA",
         "Approver": "All Approvers"
     },
+    "hol": {
+        "Project Details": "US0799HOL",
+        "Task Details": "Public Holiday-Public Holiday"
+    },
     "atx": {
         "Project Details": "100694935",
         "Task Details": "Technical Architect"
     },
-    "cushtm": {
+    "clubs": {
+        "Project Details": "100680532",
+        "Task Details": "Technical Architecture"
+    },
+    "clubs2": {
+        "Project Details": "100680532",
+        "Task Details": "Phase 2 Billable-BT"
+    },
+    "cushe": {
         "Project Details": "100586958",
         "Task Details": "BT"
     },
-	"cushsupport": {
+    "cushs": {
         "Project Details": "100560527",
         "Task Details": "BT"
     },
-    "cush": {
-        "Project Details": "100560527",
+    "cushbg": {
+        "Project Details": "100713139",
         "Task Details": "BT"
     },
     "kont": {
@@ -32,54 +44,57 @@
     "dartsupport": {
         "Project Details": "100695287",
         "Task Details": "Technical Architecture"
-    },    
+    },
     "dartpdp": {
         "Project Details": "100680067",
-        "Task Details": "Technical Architecture" 
+        "Task Details": "Technical Architecture"
     },
-	"dartrefresh": {
+    "dartrefresh": {
         "Project Details": "100694120",
-        "Task Details": "BT" 
+        "Task Details": "BT"
     },
-	
     "dartnbt": {
         "Project Details": "100696864",
         "Task Details": "NBT"
     },
-    "clubs": {
-        "Project Details": "100680532",
-        "Task Details": "Technical Architecture"
-    },
-    "clubs2": {
-        "Project Details": "100680532",
-        "Task Details": "Phase 2 Billable-BT"
-    },
     "lead": {
-        "Project Details": "100529336",
-        "Task Details": "NBT"
+        "Project Details": "US0799BEN",
+        "Task Details": "1-Task 1"
     },
     "citta": {
         "Project Details": "100570409",
         "Task Details": "Technical Architecture"
     },
     "int": {
-        "Project Details": "100529327",
-        "Task Details": "NBT"
+        "Project Details": "US0799BEN",
+        "Task Details": "1-Task 1"
     },
     "bbwinapp": {
         "Project Details": "100690868",
         "Task Details": "Technical Architecture"
     },
+    "bbwl": {
+        "Project Details": "100715576",
+        "Task Details": "BT"
+    },
     "sales": {
-        "Project Details": "100548001",
-        "Task Details": "NBT"
+        "Project Details": "US0799BEN",
+        "Task Details": "1-Task 1"
+    },
+    "ua": {
+        "Project Details": "100702298",
+        "Task Details": "NBT-Non Billable"
     },
     "train": {
-        "Project Details": "100529296",
-        "Task Details": "NBT"
+        "Project Details": "US0799BEN",
+        "Task Details": "1-Task 1"
     },
     "rap": {
         "Project Details": "100593408",
         "Task Details": "Technical Architecture"
+    },
+    "vac": {
+        "Project Details": "US0799VAC",
+        "Task Details": "1-Task"
     }
 }

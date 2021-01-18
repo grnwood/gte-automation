@@ -1,47 +1,21 @@
+period=1/11
 
-10/26
-kont,internal scrum research and meetings specs and tickets etc,495
-citta,yotpo research questions and calls,45
+1/11
+sales,kont estimates,60
+vac,vacation,420
 
-10/27
-citta,yotpo configuration and troubleshooting,60
-citta,checkin with dev on yotpo and emails and troubleshooting,60
-cush,support acushnet call,15
-kont,debugging launch cart and cartridge connector,120
-int,sf b2c dev team meeting,60
-clubs,weekly status meeting,75
-dartsupport,dart 258,30
-kont,r12 release meeting,15
-int,emails and timesheets,45
+1/12
+sales,kont estimates,60
+vac,vacation,420
 
-10/28
-bbwinapp,daily scrum,15
-kont,daily client scrum,30
-citta,yotpo email and response,15
-bbwinapp,demo loyalty sia,60
-sales,hour with kontoor and efforts,75	
-kont,sfcc sfsc reserach and work,180
-dartrefresh,meeting about tickets and site speed,60
-kont,securepay call,60
-citta,yotpo research and ticket updates,45
-int,emails and timesheets,60
-sales,uniform advantage discussion,30
-sales,kontoor additional work,30
+1/13
+vac,vacation,480
 
-10/29
-citta,yotpo call and troubleshooting,75
-atx,working on 103,30
-kont,oobo metings and scrums,120
-cush,vertex ticket call,30
-sales,kontoor line of work,45
-citta,additional yotpo tshooting call,30
-int,jeff joe discussion on promotion case and resourcing,60
-dartrefresh,nbt internal meeting,60
-int,emails and timesheets,60
+1/14
+vac,vacation,480
 
-10/30
-kont,oobo stuff,120
-bbwinapp,scrum timeout modal,60
-kont,oobo salesforce discussion,60
-train,sfmc developer training,180
-citta,yotpo stuff,120
+1/15
+vac,vacation,480
+
+
+

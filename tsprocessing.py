@@ -95,7 +95,7 @@ def sanity_check_input(timesheet_entries, timesheet_mapping):
             assert (len(tline.split(',')) == 3 or len(tline.strip()) == 0 \
                 or tscommon.date_heading_matcher.match(tline.strip()) or 'period' in tline)
         except:
-            raise Exception('bad line #'+str(line))
+            raise Exception('bad line #'+str(line)+' contents: '+tline)
 
 def get_consolidated_day_map(day_map):
     consolidated_day_map = {}
@@ -126,8 +126,6 @@ def summarize_the_week(consolidated_day_map):
                 day_total = day_total + curtotal
                 entries.append(sttKey+'( '+str(curtotal) +
                                ' mins / ' + str(curtotal/60) + ' hours)')
-                entries[0] = "== "+key + " == day total ("+str(
-                    day_total)+" mins / " + str(day_total/60) + " hours) =="
             week_total = week_total + day_total
             day_summary.append(entries)
 

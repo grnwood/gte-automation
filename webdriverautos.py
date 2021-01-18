@@ -155,7 +155,7 @@ def run_gte_time_matrix(driver, timesheet_mapping, consolidated_day_map):
             datestring = key
             if (len(datestring) <= 5):
                 # assume 2020
-                datestring = datestring + "/2020"
+                datestring = datestring + "/2021"
             curdate = datetime.strptime(datestring, '%m/%d/%Y')
             weekday = calendar.day_name[curdate.weekday()]
             print("\t+-- for day: "+str(curdate)+" ("+weekday+")")
