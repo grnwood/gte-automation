@@ -2,7 +2,7 @@ import tscommon
 import re
 
 date_heading_matcher = re.compile(r"\d\d?\/\d\d?")
-gte_task_matcher = re.compile('\d{9}')
+gte_task_matcher = re.compile('^[a-zA-Z0-9_]*')
 
 def get_bucket_for_project_code(timesheep_mapping, project_code):
     for x in timesheep_mapping:

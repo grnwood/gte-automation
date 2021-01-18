@@ -58,6 +58,10 @@ if not just_do_data_check:
     timer.sleep(page_wait_for_rows)
 
     wd.check_success(driver)
+    '''
+    Set a breakpoint on the driver.quit() line if you want to play with
+    and then manually submit it.  This script will not automatically submit it.
+    '''
     driver.quit()
 else:
     print('Data check only, not running actual timesheet')

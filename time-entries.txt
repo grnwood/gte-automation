@@ -1,4 +1,4 @@
-period=1/11
+period=January 11
 
 1/11
 sales,kont estimates,60
